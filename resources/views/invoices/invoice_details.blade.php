@@ -199,10 +199,9 @@
                                                                         <h6 class="modal-title">حذف المرفق</h6><button aria-label="Close" class="close" data-dismiss="modal"
                                                                                                                       type="button"><span aria-hidden="true">&times;</span></button>
                                                                     </div>
-                                                                    <form action="{{route('delete_file',[$attach->invoice_number,$attach->file_name,$attach->id])}}">
+                                                                    <form action="{{route('delete_file',[$attach->invoice_number,$attach->file_name,$attach->id])}}" method="post">
 
                                                                         @csrf
-                                                                        @method('DELETE')
                                                                         <div class="modal-body">
                                                                             <p>هل انت متاكد من عملية الحذف ؟</p><br>
                                                                             <input type="text"class="form-control" name="file_name"value="{{$attach->file_name}}" readonly>
@@ -226,7 +225,7 @@
                                                                         <h6 class="modal-title">حذف المرفق</h6><button aria-label="Close" class="close" data-dismiss="modal"
                                                                                                                        type="button"><span aria-hidden="true">&times;</span></button>
                                                                     </div>
-                                                                    <form action="{{route('delete_file',[$attach->invoice_number,$attach->file_name,$attach->id])}}">
+                                                                    <form action="{{route('delete_file',[$attach->invoice_number,$attach->file_name,$attach->id])}}" method="post">
 
                                                                         @csrf
                                                                         <div class="modal-body">

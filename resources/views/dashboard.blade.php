@@ -161,29 +161,7 @@
 
     <!-- row opened -->
 
-    <div class="justify-content-center">
-        <div class="card">
-            <div class="card-header bg-transparent pd-b-0 pd-t-20 bd-b-0">
-                <div class="d-flex justify-content-between">
-                    <h4 class="card-title mb-0">احصائيات عن حالات الفواتير</h4>
-                    <i class="mdi mdi-dots-horizontal text-gray"></i>
-                </div>
-            </div>
-            <div class="card-body">
-{{--                <div id="donutchart" style="width: 500px; height: 300px;"></div>--}}
-                <div class="row">
-                    <div class="col">
-                        <div id="piechart_div" style="border: 1px solid #ccc"></div>
-                    </div>
-                    <div class="col">
-                        <div id="barchart_div" style="border: 1px solid #ccc"></div>
-                    </div>
-                </div>
 
-
-            </div>
-        </div>
-    </div>
 
 
 
@@ -219,72 +197,7 @@
 
 
 
-{{--    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>--}}
-{{--    <script type="text/javascript">--}}
-{{--        google.charts.load("current", {packages:["corechart"]});--}}
-{{--        google.charts.setOnLoadCallback(drawChart);--}}
-{{--        function drawChart() {--}}
-{{--            var data = google.visualization.arrayToDataTable([--}}
-{{--                ['Task', 'Hours per Day'],--}}
-{{--                ['الفواتير الغير مدفوعة',  {{$count_invoices2}}],--}}
-{{--                ['الفواتير المدفوعة جزئيا', {{$count_invoices3}}],--}}
-{{--                ['الفواتير المدفوعة',    {{$count_invoices1}}]--}}
-{{--            ]);--}}
 
-{{--            var options = {--}}
-{{--                title: 'نسبة الفواتير',--}}
-{{--                pieHole: 0.4,--}}
-{{--                colors:['#E74C3C','#F39C12','#229954']--}}
-{{--            };--}}
-
-{{--            var chart = new google.visualization.PieChart(document.getElementById('donutchart'));--}}
-{{--            chart.draw(data, options);--}}
-{{--        }--}}
-{{--    </script>--}}
-
-
-
-
-
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript">
-            // Load Charts and the corechart and barchart packages.
-            google.charts.load('current', {'packages':['corechart']});
-
-            // Draw the pie chart and bar chart when Charts is loaded.
-            google.charts.setOnLoadCallback(drawChart);
-
-            function drawChart() {
-
-                var data = new google.visualization.DataTable();
-                data.addColumn('string', 'Topping');
-                data.addColumn('number', 'Slices');
-                data.addRows([
-                    ['الفواتير الغير مدفوعة', {{$count_invoices2}}],
-                    ['الفواتير المدفوعة جزئيا', {{$count_invoices3}}],
-                    ['الفواتير المدفوعة', {{$count_invoices1}}],
-
-                ]);
-
-                var piechart_options = {title:'نسبة الفواتير',
-                    width:400,
-                    height:300,
-                    colors:['#E74C3C','#F39C12','#229954']
-                };
-                var piechart = new google.visualization.PieChart(document.getElementById('piechart_div'));
-                piechart.draw(data, piechart_options);
-
-                var barchart_options = {title:'نسبة الفواتير',
-                    width:400,
-                    height:300,
-                    legend: 'none',
-                    colors:['#3c7ee7']
-
-                };
-                var barchart = new google.visualization.BarChart(document.getElementById('barchart_div'));
-                barchart.draw(data, barchart_options);
-            }
-        </script>
 
 @endsection
 
