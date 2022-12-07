@@ -94,11 +94,11 @@ class InvoiceAttachementController extends Controller
       return Storage::disk('public')->download($invoice_number.'/'.$file_name);
     }
 
-   public function delete_file($invoice_number,$file_name,$id){
+   public function delete_file(Request $request){
 
-        invoice_attachement::destroy($id);
+        invoice_attachement::findorFail($request->id)->delete();
 
-        Storage::disk('public')->delete($invoice_number.'/'.$file_name);
+        Storage::disk('public')->delete($request->invoice_number.'/'.$request->file_name);
 
         session()->flash('success','تم حذف المرفق بنجاح');
         return back();

@@ -87,6 +87,7 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @can('صلاحية العرض للمسؤل')
                             @foreach ($data as $key => $user)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
@@ -122,7 +123,12 @@
 
                                     <td>
                                        @can('تعديل مستخدم')
-                                        <a class="btn btn-primary btn-sm" href="{{ route('users.edit',$user->id) }}">تعديل</a>
+                                            <form action="{{route('EditUser')}}"method="post"style="display: inline">
+                                                @csrf
+                                                <input type="hidden"value="{{$user->id}}"name="id">
+                                                <button type="submit" class="btn btn-primary btn-sm">تعديل</button>
+
+                                            </form>
                                         @endcan
 
                                         @can('حذف مستخدم')
@@ -136,6 +142,62 @@
                                     </td>
                                 </tr>
                             @endforeach
+                            @endcan
+
+                            @can('صلاحية العرض للمستخدم العادي')
+                                    <tr>
+                                        <td>1</td>
+                                        <td>
+                                            @if(!empty($user_open->photo))
+                                                <img SRC="{{asset('attachments/users/'.$user_open->photo)}}"style="max-width: 50px;border-radius: 5px;">
+                                            @else
+                                                <img src="{{asset('assets/img/avatar.png')}}"style="max-width: 50px;border-radius: 5px;">
+                                            @endif
+                                        </td>
+                                        <td>{{ $user_open->name }}</td>
+                                        <td>{{ $user_open->email }}</td>
+                                        <td>
+                                            @if ($user_open->status == 'مفعل')
+                                                <span class="label text-success d-flex">
+                                                <div class="dot-label bg-success ml-1"></div>{{ $user_open->status }}
+                                            </span>
+                                            @else
+                                                <span class="label text-danger d-flex">
+                                                <div class="dot-label bg-danger ml-1"></div>{{ $user_open->status }}
+                                            </span>
+                                            @endif
+                                        </td>
+
+                                        <td>
+                                            @if(!empty($user_open->getRoleNames()))
+                                                @foreach($user_open->getRoleNames() as $v)
+                                                    <label class="badge badge-success">{{ $v }}</label>
+                                                @endforeach
+                                            @endif
+                                        </td>
+
+
+                                        <td>
+                                            @can('تعديل مستخدم')
+                                                <form action="{{route('EditUser')}}"method="post"style="display: inline">
+                                                    @csrf
+                                                    <input type="hidden"value="{{$user_open->id}}"name="id">
+                                                    <button type="submit" class="btn btn-primary btn-sm">تعديل</button>
+
+                                                </form>
+                                            @endcan
+
+                                            @can('حذف مستخدم')
+                                                <form action="{{route('users.destroy',$user_open->id)}}" method="post" style="display: inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm">حذف</button>
+
+                                                </form>
+                                            @endcan
+                                        </td>
+                                    </tr>
+                            @endcan
 
                             </tbody>
                         </table>

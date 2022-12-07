@@ -29,6 +29,7 @@ class UserController extends Controller
     {
         $user_open = User::find(Auth::user()->id);
         $data = User::orderBy('id','DESC')->paginate(5);
+
         return view('users.index',compact('data','user_open'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }

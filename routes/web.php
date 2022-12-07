@@ -31,7 +31,7 @@ Route::get('/', function () {
 })->middleware('guest');
 
 
-Auth::routes(['register'=>false]);
+Auth::routes();
 
 
 Route::group(['middleware' => ['auth','status']], function() {
@@ -61,7 +61,7 @@ Route::group(['middleware' => ['auth','status']], function() {
 
 
 //invoices attachments
-    Route::get('delteFile/{invoice_number}/{file_name}/{id}',[InvoiceAttachementController::class,'delete_file'])->name('delete_file');
+    Route::post('delteFile/',[InvoiceAttachementController::class,'delete_file'])->name('delete_file');
     Route::resource('/InvoiceAttachment',InvoiceAttachementController::class);
 
 
